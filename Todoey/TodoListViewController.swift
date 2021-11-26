@@ -7,14 +7,47 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class TodoListViewController: UITableViewController {
     
-    let itemArray = ["Find Mike", "Buy Eggos", "Destroy Demogorgon"]
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    
+    private let disposeBag = DisposeBag()
+    var itemArray = ["Find Mike", "Buy Eggos", "Destroy Demogorgon"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        bind()
+    }
+    
+    private func bind() {
+        addButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.add()
+        }).disposed(by: disposeBag)
+    }
+    
+    private func add() {
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
+        let actAdd = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            guard let text = textField.text else {
+                return
+            }
+            self.itemArray.append(text)
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        
+        alert.addAction(actAdd)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

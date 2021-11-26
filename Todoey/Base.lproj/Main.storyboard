@@ -31,7 +31,16 @@
                             <outlet property="delegate" destination="FGs-V0-dq3" id="SYQ-nb-yXE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoey" id="jWy-MM-fkM"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Todoey" id="jWy-MM-fkM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Qpc-6t-l8W">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="addButton" destination="Qpc-6t-l8W" id="BwA-yE-r8b"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YdS-M0-6A0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
